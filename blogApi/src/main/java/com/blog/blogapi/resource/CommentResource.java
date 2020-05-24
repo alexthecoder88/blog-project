@@ -1,5 +1,7 @@
 package com.blog.blogapi.resource;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.blogapi.dto.CommentDto;
 import com.blog.blogapi.manager.CommentManager;
-import com.blog.blogapi.model.entity.Comment;
+import com.blog.blogapi.manager.PostManager;
+import com.blog.blogapi.model.entity.Post;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -23,10 +26,15 @@ public class CommentResource {
 	@Autowired
 	private CommentManager commentManager;
 
+	@Autowired
+	private PostManager postManager;
+
 	@GetMapping(value = "/{id}/comments")
-	public Comment getCommentById(@PathVariable String id)
+	public List getCommentsByPostId(@PathVariable String id)
 	{
-		return commentManager.findById(Integer.parseInt(id));
+		Post post = postManager.findById(Integer.parseInt(id));
+		List comments = post.getComments();
+		return comments;
 	}
 
 	@PostMapping(value = "/{id}/comment", produces = "application/json", consumes = "application/json")

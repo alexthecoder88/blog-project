@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Blog from './blog/Blog';
 import PostCreator from './blog/PostCreator';
+import PostEditor from './blog/PostEditor';
 import * as serviceWorker from './serviceWorker';
 import { HashRouter, Route } from "react-router-dom";
 
@@ -13,6 +14,7 @@ function App() {
     <div>
       <Route exact path="/" component={Blog} />
       <Route exact path="/newpost" component={PostCreator} />
+      <Route exact path="/editpost" component={PostEditor} />
     </div>
   );
 }

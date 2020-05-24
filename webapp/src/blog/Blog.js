@@ -26,7 +26,7 @@ export default function Blog(props) {
       return allPosts.map((post) => {
         return (
           <div style={{margin:"5%"}}>
-            <BlogPost {...props} {...post} />
+            <BlogPost key={post.id} {...props} {...post} />
           </div>
         );
       });
@@ -35,7 +35,7 @@ export default function Blog(props) {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <h1>Random blog project</h1>
+      <h1>Alexandro's blog</h1>
       <Button {...props} callback={redirecToPostCreatorScreen} buttonTxt={buttonTxt} />
       {renderAllPosts()}
     </div>

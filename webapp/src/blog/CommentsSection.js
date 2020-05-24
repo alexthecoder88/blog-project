@@ -2,19 +2,14 @@ import React, { useEffect, useState, useCallback } from "react";
 import Button from "./Button";
 import CommentService from "./../services/CommentService";
 import TextField from "@material-ui/core/TextField";
-export default function PostEditor(props) {
+export default function CommentsSection(props) {
   const buttonTxt = "Save changes";
-  const [title, setTitle] = useState(null);
-  const [content, setContent] = useState(null);
   const [comments, setComments] = useState(null);
   const [stateNewComment, setStateNewComment] = useState(null);
   const [DOMIDOfcommentBeingUpdated, setDOMIDOfcommentBeingUpdated] = useState(null);
   let commentBeingUpdated = null;
   let newComment = null;
   useEffect(() => {
-    console.log(props);
-    setTitle(props.location.customData.title);
-    setContent(props.location.customData.content);
     getPostComments();
   }, []);
 
@@ -22,10 +17,7 @@ export default function PostEditor(props) {
     const allCommentsPromise = await CommentService.getCommentsbyPostId(props.location.customData.id);
     const allComments = await allCommentsPromise.json();
     console.log(allComments);
-    if (allComments != null && allComments.length > 0) {
-      setComments(null);
-      setComments(allComments);
-    }
+    setComments(allComments);
   }
 
   async function createNewComment() {
@@ -33,8 +25,9 @@ export default function PostEditor(props) {
     const newCommentIdPromise = await CommentService.createComment(newCommentJson, props.location.customData.id);
     const newCommentId = await newCommentIdPromise.json();
     if (newCommentId != null && Number(newCommentId) > 0) {
-      setStateNewComment("");
+      setStateNewComment(null);
       newComment = null;
+      getPostComments()
     }
   }
 

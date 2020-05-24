@@ -8,7 +8,6 @@ export default function CommentsSection(props) {
   const [stateNewComment, setStateNewComment] = useState(null);
   const [DOMIDOfcommentBeingUpdated, setDOMIDOfcommentBeingUpdated] = useState(null);
   let commentBeingUpdated = null;
-  let newComment = null;
   useEffect(() => {
     getPostComments();
   }, []);
@@ -21,13 +20,14 @@ export default function CommentsSection(props) {
   }
 
   async function createNewComment() {
-    const newCommentJson = JSON.stringify({ comment: newComment });
-    const newCommentIdPromise = await CommentService.createComment(newCommentJson, props.location.customData.id);
-    const newCommentId = await newCommentIdPromise.json();
-    if (newCommentId != null && Number(newCommentId) > 0) {
-      setStateNewComment(null);
-      newComment = null;
-      getPostComments()
+    if (stateNewComment != null && stateNewComment != "") {
+      const newCommentJson = JSON.stringify({ comment: stateNewComment });
+      const newCommentIdPromise = await CommentService.createComment(newCommentJson, props.location.customData.id);
+      const newCommentId = await newCommentIdPromise.json();
+      if (newCommentId != null && Number(newCommentId) > 0) {
+        setStateNewComment("");
+        getPostComments();
+      }
     }
   }
 
@@ -37,16 +37,18 @@ export default function CommentsSection(props) {
     setDOMIDOfcommentBeingUpdated(txtFieldId);
   }
 
-  async function editComment() {
-    const commentBeingUpdatedJson = JSON.stringify({ comment: commentBeingUpdated });
+  async function editComment(commentId) {
+    if (commentBeingUpdated != null && commentBeingUpdated != "") {
+      const commentBeingUpdatedJson = JSON.stringify({ comment: commentBeingUpdated });
 
-    const commentBeingUpdatedIdPromise = await CommentService.updateComment(commentBeingUpdatedJson, props.location.customData.id);
-    const commentBeingUpdatedId = await commentBeingUpdatedIdPromise.json();
-    console.log(commentBeingUpdatedId);
+      const commentBeingUpdatedIdPromise = await CommentService.updateComment(commentBeingUpdatedJson, commentId);
+      const commentBeingUpdatedId = await commentBeingUpdatedIdPromise.json();
+      console.log(commentBeingUpdatedId);
 
-    if (commentBeingUpdatedId != null && Number(commentBeingUpdatedId) > 0) {
-      setDOMIDOfcommentBeingUpdated(null);
-      commentBeingUpdated = null;
+      if (commentBeingUpdatedId != null && Number(commentBeingUpdatedId) > 0) {
+        setDOMIDOfcommentBeingUpdated(null);
+        commentBeingUpdated = null;
+      }
     }
   }
 
@@ -70,10 +72,10 @@ export default function CommentsSection(props) {
             id="standard-required"
             label="New comment"
             value={stateNewComment}
-            onChange={(event) => (newComment = event.target.value)}
+            onChange={(event) => setStateNewComment(event.target.value)}
           />
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button buttonTxt="CANCEL" />
+            <Button buttonTxt="CANCEL" callback={() => setStateNewComment("")} />
             <Button buttonTxt="ADD" callback={createNewComment} />
           </div>
         </div>
@@ -103,7 +105,7 @@ export default function CommentsSection(props) {
               ) : (
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <Button buttonTxt="CANCEL" />
-                  <Button buttonTxt="SAVE" callback={editComment} />
+                  <Button buttonTxt="SAVE" callback={() => editComment(comment.id)} />
                 </div>
               )}
             </div>

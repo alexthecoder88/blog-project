@@ -43,7 +43,7 @@ public class CommentResource {
 		return commentManager.save(commentDto, Integer.parseInt(id));
 	}
 
-	@PutMapping(value = "/{id}/comment", produces = "application/json", consumes = "application/json")
+	@PutMapping(value = "/{id}/comments", produces = "application/json", consumes = "application/json")
 	public int updateComment(@RequestBody CommentDto commentDto, @PathVariable String id)
 	{
 		return commentManager.updateComment(commentDto, Integer.parseInt(id));

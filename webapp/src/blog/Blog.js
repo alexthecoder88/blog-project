@@ -2,11 +2,19 @@ import React, { useEffect, useState } from "react";
 import BlogPost from "./BlogPost";
 import Button from "./Button";
 import PostService from "./../services/PostService";
-
+import Loader from "./Loader";
 export default function Blog(props) {
+
+  const spinnerDivContainer = {
+    position: "absolute",
+    left: "50%",
+    top: "98%",
+    transform: "translate(-50%, -50%)",
+  };
+  
   const buttonTxt = "Create new post";
   const [allPosts, setAllPosts] = useState(null);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
 
     getAllPosts();
@@ -16,7 +24,12 @@ export default function Blog(props) {
     const allPostsPromise = await PostService.getAllPosts();
     const allPosts = await allPostsPromise.json();
     console.log(allPosts);
-    setAllPosts(allPosts);
+    if(allPosts !=null){
+      debugger
+      setAllPosts(allPosts);
+      setLoading(false)
+    }
+    
   }
 
   async function deletePost(postId){
@@ -43,8 +56,15 @@ export default function Blog(props) {
     }
   }
 
+  function showLoader(){
+    if(loading){
+      return (<Loader />)
+    }
+  }
+
   return (
     <div style={{ textAlign: "center" }}>
+      {showLoader()}
       <h1>Alexandro's blog</h1>
       <Button {...props} callback={redirecToPostCreatorScreen} buttonTxt={buttonTxt} />
       {renderAllPosts()}

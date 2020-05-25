@@ -21,4 +21,15 @@ export default class PostServices {
 
    return fetch("http://192.168.1.3:8080/post");
   }
+
+  static deletePost(postId) {
+    const fetchParams = {
+      method: "Delete",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+   return fetch("http://192.168.1.3:8080/post/"+postId, fetchParams);
+  }
 }

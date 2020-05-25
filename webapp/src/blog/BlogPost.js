@@ -33,7 +33,7 @@ export default function BlogPost(props) {
         <Button size="small" color="primary" onClick={() =>  props.history.push({pathname:"/editpost" ,customData:{...props}})}>
           EDIT
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={() => props.deletePost()}>
           DELETE
         </Button>
       </CardActions>

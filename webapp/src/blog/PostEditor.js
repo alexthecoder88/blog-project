@@ -1,7 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
-import CommentService from "./../services/CommentService";
-import TextField from "@material-ui/core/TextField";
 import CommentsSection from "./CommentsSection";
 
 
@@ -9,11 +7,6 @@ export default function PostEditor(props) {
   const buttonTxt = "Save changes";
   const [title, setTitle] = useState(null);
   const [content, setContent] = useState(null);
-  const [comments, setComments] = useState(null);
-  const [stateNewComment, setStateNewComment] = useState(null);
-  const [DOMIDOfcommentBeingUpdated, setDOMIDOfcommentBeingUpdated] = useState(null);
-  let commentBeingUpdated = null;
-  let newComment = null;
   useEffect(() => {
     console.log(props);
     setTitle(props.location.customData.title);

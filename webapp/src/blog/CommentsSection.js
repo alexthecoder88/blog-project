@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import CommentService from "./../services/CommentService";
 import TextField from "@material-ui/core/TextField";
 export default function CommentsSection(props) {
-  const buttonTxt = "Save changes";
   const [comments, setComments] = useState(null);
   const [stateNewComment, setStateNewComment] = useState(null);
   const [DOMIDOfcommentBeingUpdated, setDOMIDOfcommentBeingUpdated] = useState(null);

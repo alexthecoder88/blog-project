@@ -8,14 +8,24 @@ export default function Blog(props) {
   const [allPosts, setAllPosts] = useState(null);
 
   useEffect(() => {
-    async function getAllPosts() {
-      const allPostsPromise = await PostService.getAllPosts();
-      const allPosts = await allPostsPromise.json();
-      console.log(allPosts);
-      setAllPosts(allPosts);
-    }
+
     getAllPosts();
   }, []);
+
+  async function getAllPosts() {
+    const allPostsPromise = await PostService.getAllPosts();
+    const allPosts = await allPostsPromise.json();
+    console.log(allPosts);
+    setAllPosts(allPosts);
+  }
+
+  async function deletePost(postId){
+    const deletePostResponse = await PostService.deletePost(postId);
+    if(deletePostResponse.status > 200 && deletePostResponse.status < 300 ){
+      console.log(deletePostResponse)
+      getAllPosts();
+    }
+  }
 
   function redirecToPostCreatorScreen() {
     props.history.push("/newpost");
@@ -26,7 +36,7 @@ export default function Blog(props) {
       return allPosts.map((post) => {
         return (
           <div style={{margin:"5%"}}>
-            <BlogPost key={post.id} {...props} {...post} />
+            <BlogPost key={post.id} {...props} {...post} deletePost={() => deletePost(post.id)} />
           </div>
         );
       });

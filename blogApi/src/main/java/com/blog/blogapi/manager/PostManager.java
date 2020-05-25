@@ -35,4 +35,10 @@ public class PostManager {
 		return postRepository.findById(postId).get();
 
 	}
+
+	public void deletePost(int postId)
+	{
+		postRepository.deleteById(postId);
+
+	}
 }

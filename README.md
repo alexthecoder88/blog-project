@@ -18,7 +18,7 @@
 -Allez dans le fichier src/index.js\
 -Modifier la variable window.$HTTP_BASE_URL pour que ça pointe vers l'url de l'api.\
 -En ligne de commande à la racine du projet , lancez "npm install". Ceci va installer les dépendances\
--Pour démarrer le projet , en ligne de commande à la racine de projet , lancez "npm start".
+-Pour démarrer le projet , en ligne de commande à la racine du projet , lancez "npm start".
 
 
 

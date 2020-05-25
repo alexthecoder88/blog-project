@@ -36,19 +36,23 @@ export default function CommentsSection(props) {
     setDOMIDOfcommentBeingUpdated(txtFieldId);
   }
 
-  async function editComment(commentId) {
+  async function editComment(commentId , unChangedComment) {
+    let commentBeingUpdatedJson = null;
     if (commentBeingUpdated != null && commentBeingUpdated != "") {
-      const commentBeingUpdatedJson = JSON.stringify({ comment: commentBeingUpdated });
-
-      const commentBeingUpdatedIdPromise = await CommentService.updateComment(commentBeingUpdatedJson, commentId);
-      const commentBeingUpdatedId = await commentBeingUpdatedIdPromise.json();
-      console.log(commentBeingUpdatedId);
-
-      if (commentBeingUpdatedId != null && Number(commentBeingUpdatedId) > 0) {
-        setDOMIDOfcommentBeingUpdated(null);
-        commentBeingUpdated = null;
+       commentBeingUpdatedJson = JSON.stringify({ comment: commentBeingUpdated });
+      }else if (unChangedComment != null && unChangedComment != ""){
+        commentBeingUpdatedJson = JSON.stringify({ comment: unChangedComment });
       }
-    }
+      if (commentBeingUpdatedJson != null && commentBeingUpdatedJson != "") {
+        const commentBeingUpdatedIdPromise = await CommentService.updateComment(commentBeingUpdatedJson, commentId);
+        const commentBeingUpdatedId = await commentBeingUpdatedIdPromise.json();
+        console.log(commentBeingUpdatedId);
+  
+        if (commentBeingUpdatedId != null && Number(commentBeingUpdatedId) > 0) {
+          setDOMIDOfcommentBeingUpdated(null);
+          commentBeingUpdated = null;
+        }
+      }
   }
 
   async function deleteComment(commentId) {
@@ -104,7 +108,7 @@ export default function CommentsSection(props) {
               ) : (
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <Button buttonTxt="CANCEL" />
-                  <Button buttonTxt="SAVE" callback={() => editComment(comment.id)} />
+                  <Button buttonTxt="SAVE" callback={() => editComment(comment.id , comment.comment)} />
                 </div>
               )}
             </div>

@@ -1,5 +1,14 @@
 export default class PostServices {
+
+static httpBaseUrl  = () => window.$HTTP_BASE_URL
+
+
   static createPost(newPostJson) {
+    const test = window.$HTTP_BASE_URL
+    console.log(test)
+
+    debugger
+  
     const fetchParams = {
       method: "POST",
       headers: {
@@ -8,7 +17,7 @@ export default class PostServices {
       body: newPostJson,
     };
 
-   return fetch("http://192.168.1.3:8080/post", fetchParams);
+   return fetch(window.$HTTP_BASE_URL+"post", fetchParams);
   }
 
   static getAllPosts() {
@@ -19,7 +28,7 @@ export default class PostServices {
       },
     };
 
-   return fetch("http://192.168.1.3:8080/post");
+   return fetch(window.$HTTP_BASE_URL+"post");
   }
 
   static deletePost(postId) {
@@ -30,7 +39,7 @@ export default class PostServices {
       },
     };
 
-   return fetch("http://192.168.1.3:8080/post/"+postId, fetchParams);
+   return fetch(window.$HTTP_BASE_URL+"post/"+postId, fetchParams);
   }
 
   static updatePost(updatedPostJson , postId) {
@@ -42,6 +51,6 @@ export default class PostServices {
       body: updatedPostJson,
     };
 
-   return fetch("http://192.168.1.3:8080/post/"+postId, fetchParams);
+   return fetch(window.$HTTP_BASE_URL+"post/"+postId, fetchParams);
   }
 }

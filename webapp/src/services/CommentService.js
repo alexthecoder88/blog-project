@@ -1,7 +1,10 @@
 export default class CommentService {
+
+  httpBaseUrl = process.env.REACT_APP_HTTP_BASE_URL
+
   static getCommentsbyPostId(postId) {
     console.log(postId);
-    return fetch("http://192.168.1.3:8080/post/" + postId + "/comments");
+    return fetch(window.$HTTP_BASE_URL+"post/" + postId + "/comments");
   }
 
   static createComment(newCommentJson , postId) {
@@ -14,7 +17,7 @@ export default class CommentService {
       body: newCommentJson,
     };
 
-   return fetch("http://192.168.1.3:8080/post/"+postId+"/comment", fetchParams);
+   return fetch(window.$HTTP_BASE_URL+"post/"+postId+"/comment", fetchParams);
   }
 
   static updateComment(newCommentJson , postId) {
@@ -27,7 +30,7 @@ export default class CommentService {
       body: newCommentJson,
     };
 
-   return fetch("http://192.168.1.3:8080/post/"+postId+"/comment", fetchParams);
+   return fetch(window.$HTTP_BASE_URL+"post/"+postId+"/comment", fetchParams);
   }
 
   static deleteComment(commentId) {
@@ -38,8 +41,8 @@ export default class CommentService {
         "Content-Type": "application/json",
       },
     };
-
-   return fetch("http://192.168.1.3:8080/post/"+commentId+"/comments", fetchParams);
+    
+   return fetch(window.$HTTP_BASE_URL+"post/"+commentId+"/comments", fetchParams);
   }
 
 }

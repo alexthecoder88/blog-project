@@ -8,6 +8,8 @@ import * as serviceWorker from './serviceWorker';
 import { HashRouter, Route } from "react-router-dom";
 
 
+window.$HTTP_BASE_URL = "http://192.168.1.3:8080/"
+
 
 function App() {
   return (

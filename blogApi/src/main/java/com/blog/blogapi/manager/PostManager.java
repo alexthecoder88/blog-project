@@ -41,4 +41,14 @@ public class PostManager {
 		postRepository.deleteById(postId);
 
 	}
+
+	public int updatePost(PostDto postDto, int postId)
+	{
+		Post postToUpdate = postRepository.getOne(postId);
+		postToUpdate.setTitle((postDto.getTitle()));
+		postToUpdate.setContent(postDto.getContent());
+		postRepository.save(postToUpdate);
+		return postToUpdate.getId();
+
+	}
 }

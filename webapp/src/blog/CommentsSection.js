@@ -86,7 +86,7 @@ export default function CommentsSection(props) {
         return comments.map((comment) => {
           const txtFieldId = "comment-container-" + comment.id;
           return (
-            <div style={{ marginBottom: "10%" }}>
+            <div style={{ marginBottom: "10%"}}>
               <div id={txtFieldId} style={{ pointerEvents: DOMIDOfcommentBeingUpdated !== txtFieldId ? "none" : "auto" }}>
                 <TextField multiline fullWidth defaultValue={comment.comment} onChange={(event) => (commentBeingUpdated = event.target.value)} />
               </div>
@@ -122,5 +122,5 @@ export default function CommentsSection(props) {
     );
   }
 
-  return <div>{renderCommentsSection()}</div>;
+  return <div style={{width: window.innerWidth > 1000 ? 320 : 200}}>{renderCommentsSection()}</div>;
 }

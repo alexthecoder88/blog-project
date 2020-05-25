@@ -22,7 +22,7 @@ function App() {
 
 ReactDOM.render(
   <HashRouter>
-    <div className="App" style={{display:"flex" , justifyContent:"center"}}>
+    <div className="App" style={{display:"flex" , justifyContent:"center" , width:"100%"}}>
     <App />
     </div>
   </HashRouter>,

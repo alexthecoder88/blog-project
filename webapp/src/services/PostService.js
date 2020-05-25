@@ -32,4 +32,16 @@ export default class PostServices {
 
    return fetch("http://192.168.1.3:8080/post/"+postId, fetchParams);
   }
+
+  static updatePost(updatedPostJson , postId) {
+    const fetchParams = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: updatedPostJson,
+    };
+
+   return fetch("http://192.168.1.3:8080/post/"+postId, fetchParams);
+  }
 }

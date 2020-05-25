@@ -21,8 +21,8 @@ export default function Blog(props) {
 
   async function deletePost(postId){
     const deletePostResponse = await PostService.deletePost(postId);
-    if(deletePostResponse.status > 200 && deletePostResponse.status < 300 ){
-      console.log(deletePostResponse)
+    console.log(deletePostResponse.status )
+    if(deletePostResponse.status >= 200 && deletePostResponse.status <= 300 ){
       getAllPosts();
     }
   }

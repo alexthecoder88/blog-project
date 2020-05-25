@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,5 +42,11 @@ public class PostResource {
 	public void deletePost(@PathVariable String id)
 	{
 		postManager.deletePost(Integer.parseInt(id));
+	}
+
+	@PutMapping(value = "/{id}", produces = "application/json", consumes = "application/json")
+	public int updatePost(@RequestBody PostDto postDto, @PathVariable String id)
+	{
+		return postManager.updatePost(postDto, Integer.parseInt(id));
 	}
 }

@@ -30,7 +30,7 @@ export default class CommentService {
       body: newCommentJson,
     };
 
-   return fetch(window.$HTTP_BASE_URL+"post/"+postId+"/comment", fetchParams);
+   return fetch(window.$HTTP_BASE_URL+"post/"+postId+"/comments", fetchParams);
   }
 
   static deleteComment(commentId) {

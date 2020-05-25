@@ -63,7 +63,7 @@ export default function Blog(props) {
   }
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center",pointerEvents:loading ? "none" : "auto" }}>
       {showLoader()}
       <h1>Alexandro's blog</h1>
       <Button {...props} callback={redirecToPostCreatorScreen} buttonTxt={buttonTxt} />

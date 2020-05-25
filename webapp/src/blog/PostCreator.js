@@ -43,7 +43,7 @@ export default function PostCreator(props) {
   }
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center", pointerEvents:loading ? "none" : "auto" }}>
       {showLoader}
       <h1>New Post</h1>
       <div style={{ marginBottom: "10%" }}>

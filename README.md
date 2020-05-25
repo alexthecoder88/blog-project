@@ -9,7 +9,7 @@
 
 # Pour rouler l'api localement :
 -Installer postgresql\
--Exécuter de DDL dans src/sql/script.sql\
+-Exécuter le DDL dans src/sql/script.sql\
 -Modifier les paramètres du datasource dans src/main/resources/application.properties \
 -Démarrer le projet avec la commande: mvn spring-boot:run
 
